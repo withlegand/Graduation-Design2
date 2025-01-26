@@ -838,7 +838,7 @@ CharacterController:
   m_StepOffset: 0.3
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Center: {x: 0, y: 1, z: 0}
 --- !u!23 &1374295803
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -846,7 +846,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1374295800}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -898,7 +898,7 @@ Transform:
   m_GameObject: {fileID: 1374295800}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 4.75, y: 1.5, z: 3.25}
+  m_LocalPosition: {x: 4.75, y: 0.5, z: 3.25}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -918,9 +918,27 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveDirection: {x: 0, y: 0, z: 0}
+  Speed: 0
   walkSpeed: 4
   runSpeed: 6
   crouchSpeed: 2
+  jumpForce: 0
+  fallForce: 0
+  crouchHeight: 0
+  standHeight: 0
+  runinputname: 304
+  jumpinputname: 32
+  crouchinputname: 306
+  state: 0
+  isWalk: 0
+  isRun: 0
+  isJump: 0
+  isGround: 0
+  isCanCrouch: 0
+  isCrouching: 0
+  crouchLayerMask:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!1 &1529010070
 GameObject:
   m_ObjectHideFlags: 0

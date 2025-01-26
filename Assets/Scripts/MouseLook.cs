@@ -24,5 +24,7 @@ public class MouseLook : MonoBehaviour
         yRotation -= MouseY;//将上下旋转的轴值进行累计
         yRotation = Mathf.Clamp(yRotation, -60f, 60f);
         transform.localRotation = Quaternion.Euler(yRotation, 0f, 0f);//摄像机上下旋转
+        playerBody.Rotate(Vector3.up * MouseX);//玩家左右移动
+
     }
 }
