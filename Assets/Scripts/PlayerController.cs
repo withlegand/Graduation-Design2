@@ -53,7 +53,7 @@ public class PlayerController: MonoBehaviour
     void Update()
     {
         CanCrouch();
-        if (Input.GetKey(crouchinputname))
+        if (Input.GetKey(crouchinputname))//按下左Ctrl键
         {
             Crouch(true);
         }
@@ -133,9 +133,16 @@ public class PlayerController: MonoBehaviour
         //获取人物头顶的高度V3位置
         Vector3 spherelocation = transform.position + new Vector3(0,0.3f,0) + Vector3.up * standHeight;
         //根据头顶上是否有物体 来判断是否可以下蹲
-        isCanCrouch = (Physics.OverlapSphere(spherelocation, characterController.radius, crouchLayerMask).Length) == 0;
+        isCanCrouch = (Physics.OverlapSphere(spherelocation, characterController.radius, crouchLayerMask).Length)==0;
 
-        print("iscancrouch"+isCanCrouch);
+        Collider[] colis = Physics.OverlapSphere(spherelocation, characterController.radius, crouchLayerMask);
+        for (int i = 0; i < colis.Length; i++)
+        {
+            print("colis:" +  colis[i].name);
+        }
+
+        print("spherelocation:" + spherelocation);
+        print("iscancrouch:"+isCanCrouch);
     }
 
     public void Crouch(bool newCrouching)
