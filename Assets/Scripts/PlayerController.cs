@@ -7,6 +7,7 @@ public class PlayerController: MonoBehaviour
 {
     private CharacterController characterController;
     public Vector3 moveDirection;
+    private AudioSource audioSource;
 
     [Header("玩家数值")]
     public float Speed;
@@ -36,10 +37,15 @@ public class PlayerController: MonoBehaviour
 
     public LayerMask crouchLayerMask;
 
+    [Header("音效")]
+    [Tooltip("行走音效")]public AudioClip walkSound;
+    [Tooltip("奔跑音效")] public AudioClip runSound;
+
     // Start is called before the first frame update
     void Start()
     {
         characterController = GetComponent<CharacterController>();
+        audioSource = GetComponent<AudioSource>();
         walkSpeed = 4f;
         runSpeed = 6f;
         crouchSpeed = 2f;
@@ -63,6 +69,7 @@ public class PlayerController: MonoBehaviour
         }
 
         jump();
+        PlayerFootSoundSet();
         Moving();
     }
 
@@ -76,7 +83,7 @@ public class PlayerController: MonoBehaviour
         isWalk = (Mathf.Abs(h) > 0 || Mathf.Abs(v) > 0) ? true : false;
 
 
-        if (isRun && isGround)
+        if (isRun && isGround && isCanCrouch && !isCrouching)
         {
             state = MovementsState.runing;
             Speed = runSpeed;
@@ -86,7 +93,18 @@ public class PlayerController: MonoBehaviour
         {
             state = MovementsState.walking;
             Speed = walkSpeed;
+            if (isCrouching)//下蹲行走
+            {
+                state = MovementsState.crouching;
+                Speed = crouchSpeed;
+            }
         }
+
+        //if (isRun && isCrouching)
+        //{
+            //state = MovementsState.crouching;
+            //Speed = crouchSpeed;
+        //}
 
         
         //设置人物移动方向（将速度进行规范化，放置人物斜向走时速度变大）
@@ -97,6 +115,7 @@ public class PlayerController: MonoBehaviour
 
     public void jump()
     {
+        if (!isCanCrouch) return;
         isJump = Input.GetKey(jumpinputname);
         //判断玩家在地面上 且此时在地面上 才能进行跳跃
         if (isJump && isGround) 
@@ -135,14 +154,14 @@ public class PlayerController: MonoBehaviour
         //根据头顶上是否有物体 来判断是否可以下蹲
         isCanCrouch = (Physics.OverlapSphere(spherelocation, characterController.radius, crouchLayerMask).Length)==0;
 
-        Collider[] colis = Physics.OverlapSphere(spherelocation, characterController.radius, crouchLayerMask);
-        for (int i = 0; i < colis.Length; i++)
-        {
-            print("colis:" +  colis[i].name);
-        }
+        //Collider[] colis = Physics.OverlapSphere(spherelocation, characterController.radius, crouchLayerMask);
+       // for (int i = 0; i < colis.Length; i++)
+        //{
+            //print("colis:" +  colis[i].name);
+        //}
 
-        print("spherelocation:" + spherelocation);
-        print("iscancrouch:"+isCanCrouch);
+        //print("spherelocation:" + spherelocation);
+        //print("iscancrouch:"+isCanCrouch);
     }
 
     public void Crouch(bool newCrouching)
@@ -154,11 +173,41 @@ public class PlayerController: MonoBehaviour
         characterController.center = characterController.height / 2.0f * Vector3.up;//将角色控制器的中心位置Y，从头顶往下减少一半的高度
 
     }
+
+    public void PlayerFootSoundSet()
+    {
+        if (isGround && moveDirection.sqrMagnitude > 0)
+        {
+            audioSource.clip = isRun ? runSound : walkSound;
+            if (!audioSource.isPlaying)
+            {
+                //播放行走和奔跑音效
+                audioSource.Play();
+                print("音效播放");
+            }
+        }
+        else
+        {
+            if (audioSource.isPlaying)
+            {
+                //音效暂停
+                audioSource.Pause();
+            }
+        }
+        //下蹲时不播放行走音效
+        if (isCrouching)
+        {
+            if (audioSource.isPlaying)
+            {
+                audioSource.Pause();
+            }
+        }
+    }
     public enum MovementsState
     {
         walking,
         runing,
-        crouch,
+        crouching,
         idle
     }
         
