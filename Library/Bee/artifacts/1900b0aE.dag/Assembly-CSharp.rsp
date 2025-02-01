@@ -370,8 +370,10 @@
 "Assets/Low Poly FPS Pack - Free (Sample)/Components/Scripts/Misc/LookAtCamera.cs"
 "Assets/Low Poly FPS Pack - Free (Sample)/Components/Scripts/Weapon_Scripts/AutomaticGunScriptLPFP.cs"
 "Assets/Low Poly FPS Pack - Free (Sample)/Components/Scripts/Weapon_Scripts/HandgunScriptLPFP.cs"
-"Assets/Scripts/MouseLook.cs"
-"Assets/Scripts/PlayerController.cs"
+"Assets/Scripts/Player/MouseLook.cs"
+"Assets/Scripts/Player/PlayerController.cs"
+"Assets/Scripts/Weapon/Weapon.cs"
+"Assets/Scripts/Weapon/Weapon_AutomaticGun.cs"
 -langversion:9.0
 /deterministic
 /optimize+
