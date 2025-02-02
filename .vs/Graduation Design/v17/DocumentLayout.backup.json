@@ -3,6 +3,10 @@
   "WorkspaceRootPath": "E:\\unity\\unity\\2022.3.17f1c1\\project\\Graduation Design\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{298EDE1E-D913-A9E0-DF0B-C84E3B183C3F}|Assembly-CSharp.csproj|e:\\unity\\unity\\2022.3.17f1c1\\project\\graduation design\\assets\\scripts\\weapon\\weapon_automaticgun.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{298EDE1E-D913-A9E0-DF0B-C84E3B183C3F}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\weapon\\weapon_automaticgun.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{298EDE1E-D913-A9E0-DF0B-C84E3B183C3F}|Assembly-CSharp.csproj|e:\\unity\\unity\\2022.3.17f1c1\\project\\graduation design\\assets\\scripts\\weapon\\weapon.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{298EDE1E-D913-A9E0-DF0B-C84E3B183C3F}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\weapon\\weapon.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
@@ -27,19 +31,32 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
+              "Title": "Weapon_AutomaticGun.cs",
+              "DocumentMoniker": "E:\\unity\\unity\\2022.3.17f1c1\\project\\Graduation Design\\Assets\\Scripts\\Weapon\\Weapon_AutomaticGun.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\Weapon\\Weapon_AutomaticGun.cs",
+              "ToolTip": "E:\\unity\\unity\\2022.3.17f1c1\\project\\Graduation Design\\Assets\\Scripts\\Weapon\\Weapon_AutomaticGun.cs",
+              "RelativeToolTip": "Assets\\Scripts\\Weapon\\Weapon_AutomaticGun.cs",
+              "ViewState": "AgIAAFgAAAAAAAAAAAAswGIAAAAfAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-02-01T07:59:50.946Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
               "Title": "Weapon.cs",
               "DocumentMoniker": "E:\\unity\\unity\\2022.3.17f1c1\\project\\Graduation Design\\Assets\\Scripts\\Weapon\\Weapon.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\Weapon\\Weapon.cs",
               "ToolTip": "E:\\unity\\unity\\2022.3.17f1c1\\project\\Graduation Design\\Assets\\Scripts\\Weapon\\Weapon.cs",
               "RelativeToolTip": "Assets\\Scripts\\Weapon\\Weapon.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAtAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-02-01T07:56:43.561Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 2,
               "Title": "PlayerController.cs",
               "DocumentMoniker": "E:\\unity\\unity\\2022.3.17f1c1\\project\\Graduation Design\\Assets\\Scripts\\PlayerController.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\PlayerController.cs",
@@ -50,7 +67,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 3,
               "Title": "MouseLook.cs",
               "DocumentMoniker": "E:\\unity\\unity\\2022.3.17f1c1\\project\\Graduation Design\\Assets\\Scripts\\MouseLook.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\MouseLook.cs",
