@@ -1132,6 +1132,63 @@ Transform:
   m_Children: []
   m_Father: {fileID: 812857392}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &1002987604
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 100000, guid: 25a9b43fe3cec3e40a5d29a816c1886a, type: 3}
+      propertyPath: m_Name
+      value: target
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 25a9b43fe3cec3e40a5d29a816c1886a, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 4.4456463
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 25a9b43fe3cec3e40a5d29a816c1886a, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.50000024
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 25a9b43fe3cec3e40a5d29a816c1886a, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 8.781702
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 25a9b43fe3cec3e40a5d29a816c1886a, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 25a9b43fe3cec3e40a5d29a816c1886a, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0.0000018099952
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 25a9b43fe3cec3e40a5d29a816c1886a, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0.0000036517781
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 25a9b43fe3cec3e40a5d29a816c1886a, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 6.8980962e-12
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 25a9b43fe3cec3e40a5d29a816c1886a, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 25a9b43fe3cec3e40a5d29a816c1886a, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 25a9b43fe3cec3e40a5d29a816c1886a, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 25a9b43fe3cec3e40a5d29a816c1886a, type: 3}
 --- !u!1 &1048412010
 GameObject:
   m_ObjectHideFlags: 0
@@ -4233,6 +4290,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7ddc354febaffd54599f050c8237f327, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  soundClips:
+    shootSound: {fileID: 0}
+    silencershootsound: {fileID: 0}
+    reloadSoundAmmotLeft: {fileID: 0}
+    reloadSoundOutOfAmmo: {fileID: 0}
+    aimSound: {fileID: 0}
+  IS_AUTORIFLE: 1
+  IS_SEMIGUN: 0
   ShootPoint: {fileID: 487512652}
   BulletShootPoint: {fileID: 1342366277}
   CasingBulletSpawnPoint: {fileID: 360058008}
@@ -4240,7 +4305,7 @@ MonoBehaviour:
   casingPrefab: {fileID: 4420745226056240, guid: 7be59128a5ee3424faf33d7a408c0b2e, type: 3}
   range: 0
   fireRate: 0.2
-  bulletMag: 500
+  bulletMag: 40
   currentBullets: 0
   bulletLeft: 0
   muzzleFlashLight: {fileID: 1360747053}
@@ -4264,6 +4329,8 @@ MonoBehaviour:
   ammoTextUI: {fileID: 1676655340}
   shootModeTextUI: {fileID: 55202910}
   state: 0
+  reloadInputName: 114
+  shootingMode: 0
 --- !u!82 &3671795507154603891
 AudioSource:
   m_ObjectHideFlags: 0
@@ -4431,3 +4498,4 @@ SceneRoots:
   - {fileID: 199141146}
   - {fileID: 1374295805}
   - {fileID: 839563801}
+  - {fileID: 1002987604}

@@ -17,7 +17,12 @@ public class SoundClips
 
 public class Weapon_AutomaticGun : Weapon
 {
+    public SoundClips soundClips;//
+    private Animator animator;
     private PlayerController playerController;
+
+    public bool IS_AUTORIFLE;//是否是自动武器
+    public bool IS_SEMIGUN;//是否是半自动武器
 
     [Header("武器部件位置")]
     [Tooltip("射击的位置")]public Transform ShootPoint;//射线打出的位置
@@ -61,8 +66,20 @@ public class Weapon_AutomaticGun : Weapon
 
     public PlayerController.MovementsState state;
 
+    [Header("键位设置")]
+    [SerializeField][Tooltip("填装子弹按键")]private KeyCode reloadInputName = KeyCode.R;
+    [Tooltip("自动半自动切换按键")]private KeyCode inspectlInputName = KeyCode.I;
+    [Tooltip("自动半自动切换按键")] private KeyCode GunShootModelInputName = KeyCode.X;
+
+    /*使用枚举区分全自动与半自动*/
+    public ShootMode shootingMode;
+    private bool GunShootInput;//根据全自动和半自动 射击的键位输入发生变化
+    private int modeNum;//模式切换的一个中间参数（1，全自动模式；2，半自动模式）
+    private string shootModeName;
+
     private void Awake()
     {
+        animator = GetComponent<Animator>();
         playerController = GetComponentInParent<PlayerController>();
         mainAudioSource = GetComponent<AudioSource>();
     }
@@ -77,13 +94,67 @@ public class Weapon_AutomaticGun : Weapon
         bulletForce = 100f;
         bulletLeft = bulletMag * 5;
         currentBullets = bulletMag;
+        originRate = fireRate;//
+        UpdateAmmoUI();
+
+        //根据不同枪械 游戏刚开始时使用不同射击模式设置
+        if (IS_AUTORIFLE)
+        {
+            modeNum = 1;
+            shootModeName = "全自动";
+            shootingMode = ShootMode.AutoRifle;
+            UpdateAmmoUI();
+        }
+        if (IS_SEMIGUN)
+        {
+            modeNum = 0;
+            shootModeName = "半自动";
+            shootingMode = ShootMode.SemiGun;
+            UpdateAmmoUI();
+        }
     }
 
 
     
     private void Update()
     {
-        state = playerController.state;//
+        //自动枪械鼠标输入方式 可以在 GeyMouseButton 和 GetMouseButtonDown 里切换
+        if (IS_AUTORIFLE)
+        {
+            //切换射击模式（全自动和半自动)
+            if (Input.GetKeyDown(GunShootModelInputName) && modeNum != 1)
+            {
+                modeNum = 1;
+                shootModeName = "全自动";
+                shootingMode = ShootMode.AutoRifle;
+                UpdateAmmoUI();
+            }
+            else if (Input.GetKeyDown(GunShootModelInputName) && modeNum != 0)
+            {
+                modeNum = 0;
+                shootModeName = "半自动";
+                shootingMode = ShootMode.SemiGun;
+                UpdateAmmoUI();
+            }
+
+            switch (shootingMode)
+            {
+                case ShootMode.AutoRifle:
+                    GunShootInput =  Input.GetMouseButton(0);
+                    fireRate = originRate;
+                    break;
+                case ShootMode.SemiGun:
+                    GunShootInput = Input.GetMouseButtonDown(0);
+                    fireRate = 0.2f;      
+                    break;
+            }
+        }
+        else
+        {
+            GunShootInput = Input.GetMouseButtonDown(0);
+        }
+
+        state = playerController.state;
         if (state ==PlayerController.MovementsState.walking && Vector3.SqrMagnitude(playerController.moveDirection)>0 && state != PlayerController.MovementsState.runing && state != PlayerController.MovementsState.crouching)
         {
             //移动时的准心开合度
@@ -100,7 +171,18 @@ public class Weapon_AutomaticGun : Weapon
             ExpaningCrossUpdate(0);
         }
 
-        if (Input.GetMouseButton(0))
+        //按下换单键,当前子弹数小于弹匣子弹数，备弹量大于0
+        //判断现在没有换弹的时候 才运行播放换弹动画
+        if (Input.GetKeyDown(reloadInputName) && currentBullets < bulletMag && bulletLeft > 0  )
+        {
+            //Reload();
+            //TODO
+            DoReloadAnimation();
+        }
+
+        SpreadFactor = 0.1f;
+
+        if (GunShootInput && currentBullets >0)
         {
             GunFire();//开枪射击
         }
@@ -118,12 +200,15 @@ public class Weapon_AutomaticGun : Weapon
         //1.控制射速
         //2.当前没有子弹了
         //不可以发射
-        if (fireTimer < fireRate || currentBullets <= 0) return;
+        if (fireTimer < fireRate || currentBullets <= 0 || animator.GetCurrentAnimatorStateInfo(0).IsName("take_out")) return;
 
         StartCoroutine(MuzzleFlashLight());//开火灯光
         muzzlePatic.Emit(1);//发射一个枪口火焰粒子
         sparkPatic.Emit(Random.Range(minSparkEmission,maxSparkEmission));//发射枪口火星粒子
         StartCoroutine(Shoot_Cross());
+
+        //播放普通开火动画（使用动画的淡入淡出效果）
+        animator.CrossFadeInFixedTime("fire",0.1f);
 
         RaycastHit hit;
         Vector3 shootDirection = ShootPoint.forward;//向前方射击
@@ -144,8 +229,9 @@ public class Weapon_AutomaticGun : Weapon
         mainAudioSource.Play();//播放设射击音效
         fireTimer = 0;//重置计时器
         currentBullets--;//当前子弹数累减
+        UpdateAmmoUI();
 
-        
+
     }
 
     //设置开火的灯光
@@ -171,6 +257,14 @@ public class Weapon_AutomaticGun : Weapon
     
     public override void Reload()
     {
+        if (bulletLeft <= 0) return;
+        //计算需要填充的子弹
+        int bulletToLoad = bulletMag - currentBullets;
+        //计算备弹扣除的子弹数
+        int bulletToReduce =  bulletLeft >= bulletToLoad ?bulletToLoad : bulletLeft;
+        bulletLeft -= bulletToReduce;//备弹减少
+        currentBullets += bulletToReduce;//当前子弹增加
+        UpdateAmmoUI();
     }
     
     public override void ExpaningCrossUpdate(float expandDegree)
@@ -208,4 +302,17 @@ public class Weapon_AutomaticGun : Weapon
             ExpendCross(Time.deltaTime * 500);
         }
     }
+
+    //更新子弹UI
+    public void UpdateAmmoUI()
+    {
+        ammoTextUI.text = currentBullets + "/" + bulletLeft;
+        shootModeTextUI.text = shootModeName;
+    }
+
+    public enum ShootMode
+    {
+        AutoRifle,
+        SemiGun
+    };
 }
