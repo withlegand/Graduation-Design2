@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -17,7 +18,7 @@ public class SoundClips
 
 public class Weapon_AutomaticGun : Weapon
 {
-    public SoundClips soundClips;//
+    
     private Animator animator;
     private PlayerController playerController;
 
@@ -55,6 +56,7 @@ public class Weapon_AutomaticGun : Weapon
     [Header("音源")]
     private AudioSource mainAudioSource;
     public SoundClips SoundClips;
+    public SoundClips shootAudioSource;
 
     [Header("UI")]
     public Image[] crossQuarterImgs;//准心
@@ -65,10 +67,12 @@ public class Weapon_AutomaticGun : Weapon
     public Text shootModeTextUI;
 
     public PlayerController.MovementsState state;
+    private bool isReloading;//判断是否在装弹
+
 
     [Header("键位设置")]
     [SerializeField][Tooltip("填装子弹按键")]private KeyCode reloadInputName = KeyCode.R;
-    [Tooltip("自动半自动切换按键")]private KeyCode inspectlInputName = KeyCode.I;
+    [Tooltip("自动半自动切换按键")]private KeyCode inspectlInputName = KeyCode.F;
     [Tooltip("自动半自动切换按键")] private KeyCode GunShootModelInputName = KeyCode.X;
 
     /*使用枚举区分全自动与半自动*/
@@ -82,6 +86,7 @@ public class Weapon_AutomaticGun : Weapon
         animator = GetComponent<Animator>();
         playerController = GetComponentInParent<PlayerController>();
         mainAudioSource = GetComponent<AudioSource>();
+        //shootAudioSource = GetComponent<AudioSource>();
     }
 
     private void Start()
@@ -171,16 +176,7 @@ public class Weapon_AutomaticGun : Weapon
             ExpaningCrossUpdate(0);
         }
 
-        //按下换单键,当前子弹数小于弹匣子弹数，备弹量大于0
-        //判断现在没有换弹的时候 才运行播放换弹动画
-        if (Input.GetKeyDown(reloadInputName) && currentBullets < bulletMag && bulletLeft > 0  )
-        {
-            //Reload();
-            //TODO
-            DoReloadAnimation();
-        }
-
-        SpreadFactor = 0.1f;
+        
 
         if (GunShootInput && currentBullets >0)
         {
@@ -192,6 +188,38 @@ public class Weapon_AutomaticGun : Weapon
         {
             fireTimer += Time.deltaTime;
         }
+
+        //播放行走跑步动画
+        animator.SetBool("Run",playerController.isRun);
+        animator.SetBool("Walk", playerController.isWalk);
+        
+
+        //两种换子弹动画
+        AnimatorStateInfo info = animator.GetCurrentAnimatorStateInfo(0);
+        if ((info.IsName("reload_ammo_left")) || info.IsName("reload_out_of_ammo"))
+        {
+            isReloading = true;
+        }
+        else
+        {
+            isReloading = false;
+        }
+
+
+        //按下换单键,当前子弹数小于弹匣子弹数，备弹量大于0
+        //判断现在没有换弹的时候 才运行播放换弹动画
+        if (Input.GetKeyDown(reloadInputName) && currentBullets < bulletMag && bulletLeft > 0 && !isReloading )
+        {
+            
+            DoReloadAnimation();
+        }
+
+        SpreadFactor = 0.1f;
+
+        if (Input.GetKeyDown(inspectlInputName))
+        {
+            animator.SetTrigger("Inspect");
+        }
     }
 
     //射击
@@ -200,7 +228,7 @@ public class Weapon_AutomaticGun : Weapon
         //1.控制射速
         //2.当前没有子弹了
         //不可以发射
-        if (fireTimer < fireRate || currentBullets <= 0 || animator.GetCurrentAnimatorStateInfo(0).IsName("take_out")) return;
+        if (fireTimer < fireRate || currentBullets <= 0 || animator.GetCurrentAnimatorStateInfo(0).IsName("take_out") || isReloading) return;
 
         StartCoroutine(MuzzleFlashLight());//开火灯光
         muzzlePatic.Emit(1);//发射一个枪口火焰粒子
@@ -252,6 +280,20 @@ public class Weapon_AutomaticGun : Weapon
 
     public override void DoReloadAnimation()
     {
+        if (currentBullets > 0 && bulletLeft > 0)
+        {
+            animator.Play("reload_ammo_left",0,0);
+            Reload();
+            mainAudioSource.clip =SoundClips.reloadSoundAmmotLeft;
+            mainAudioSource.Play();
+        }
+        if (currentBullets == 0 && bulletLeft > 0)
+        {
+            animator.Play("reload_out_of_ammo", 0, 0);
+            Reload();
+            mainAudioSource.clip = SoundClips.reloadSoundOutOfAmmo;
+            mainAudioSource.Play();
+        }
     }
 
     
