@@ -21,6 +21,8 @@ public class Weapon_AutomaticGun : Weapon
     
     private Animator animator;
     private PlayerController playerController;
+    private Camera mainCamera;
+    private Camera gunCamera;
 
     public bool IS_AUTORIFLE;//是否是自动武器
     public bool IS_SEMIGUN;//是否是半自动武器
@@ -68,7 +70,10 @@ public class Weapon_AutomaticGun : Weapon
 
     public PlayerController.MovementsState state;
     private bool isReloading;//判断是否在装弹
+    private bool isAiming;//判断是否在瞄准
 
+    private Vector3 sniperingFiflePosition;//枪默认的初始位置
+    public  Vector3 sniperingFifleOnPosition;//开始瞄准的模型位置
 
     [Header("键位设置")]
     [SerializeField][Tooltip("填装子弹按键")]private KeyCode reloadInputName = KeyCode.R;
@@ -87,10 +92,12 @@ public class Weapon_AutomaticGun : Weapon
         playerController = GetComponentInParent<PlayerController>();
         mainAudioSource = GetComponent<AudioSource>();
         //shootAudioSource = GetComponent<AudioSource>();
+        mainCamera = Camera.main;
     }
 
     private void Start()
     {
+        sniperingFiflePosition = transform.localPosition;
         muzzleFlashLight.enabled = false;
         crossExpanedDegree = 50f;
         maxCrossDegree = 300f;
@@ -214,7 +221,25 @@ public class Weapon_AutomaticGun : Weapon
             DoReloadAnimation();
         }
 
-        SpreadFactor = 0.1f;
+        //鼠标右键进入瞄准
+        if (Input.GetMouseButton(1) && !isReloading && !playerController.isRun)
+        {
+            isAiming = true;
+            animator.SetBool("Aim",isAiming);
+            //瞄准时需要微调一下枪的模型位置
+            transform.localPosition = sniperingFifleOnPosition;
+        }
+        else
+        {
+            isAiming = false;
+            animator.SetBool("Aim", isAiming);
+            //瞄准时需要微调一下枪的模型位置
+            transform.localPosition = sniperingFiflePosition;
+        }
+
+
+        //腰射和瞄准射击精度不同
+        SpreadFactor = (isAiming) ? 0.01f: 0.1f;
 
         if (Input.GetKeyDown(inspectlInputName))
         {
@@ -237,6 +262,17 @@ public class Weapon_AutomaticGun : Weapon
 
         //播放普通开火动画（使用动画的淡入淡出效果）
         animator.CrossFadeInFixedTime("fire",0.1f);
+
+        if (!isAiming)
+        {
+            //播放普通开火动画（使用动画的淡入淡出效果）
+            animator.CrossFadeInFixedTime("Fire", 0.1f);
+        }
+        else
+        {
+            //瞄准状态下，播放瞄准开火动画
+            animator.Play("aim_fire", 0, 0);
+        }
 
         RaycastHit hit;
         Vector3 shootDirection = ShootPoint.forward;//向前方射击
@@ -270,12 +306,34 @@ public class Weapon_AutomaticGun : Weapon
         muzzleFlashLight.enabled = false;
     }
 
+    //进入瞄准，隐藏准心，摄像机视野变近
     public override void AimIn()
     {
+        float currentVelocity = 0f;
+        for (int i = 0; i < crossQuarterImgs.Length; i++)
+        {
+            crossQuarterImgs[i].gameObject.SetActive(false);
+        }
+
+        //瞄准时摄像机视野变近
+        mainCamera.fieldOfView = Mathf.SmoothDamp(30,60,ref currentVelocity,0.1f);
+        mainAudioSource.clip = SoundClips.aimSound;
+        mainAudioSource.Play();
     }
 
+    //
     public override void AimOut()
     {
+        float currentVelocity = 0f;
+        for (int i = 0; i < crossQuarterImgs.Length; i++)
+        {
+            crossQuarterImgs[i].gameObject.SetActive(true);
+        }
+
+        
+        mainCamera.fieldOfView = Mathf.SmoothDamp(60, 30, ref currentVelocity, 0.5f);
+        mainAudioSource.clip = SoundClips.aimSound;
+        mainAudioSource.Play();
     }
 
     public override void DoReloadAnimation()
