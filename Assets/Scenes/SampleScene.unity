@@ -197,17 +197,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 79810320}
   m_CullTransparentMesh: 1
---- !u!114 &116106989 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 6086013486350831580, guid: 55e4eb5a2ddddba4dbc95c9c7e0d1af6, type: 3}
-  m_PrefabInstance: {fileID: 8716106980301775529}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!198 &119412811 stripped
 ParticleSystem:
   m_CorrespondingSourceObject: {fileID: 8143578891728891464, guid: 55e4eb5a2ddddba4dbc95c9c7e0d1af6, type: 3}
@@ -674,17 +663,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 3375605260080136770, guid: ef9667ac227f506409daf05f840f3f7a, type: 3}
   m_PrefabInstance: {fileID: 648593050}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &454804591 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 7498973652951743433, guid: 55e4eb5a2ddddba4dbc95c9c7e0d1af6, type: 3}
-  m_PrefabInstance: {fileID: 8716106980301775529}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &459218276
 GameObject:
   m_ObjectHideFlags: 0
@@ -2027,7 +2005,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!1 &738204542
 GameObject:
   m_ObjectHideFlags: 0
@@ -2925,11 +2903,11 @@ MonoBehaviour:
     reloadSoundOutOfAmmo: {fileID: 0}
     aimSound: {fileID: 0}
   crossQuarterImgs:
-  - {fileID: 1217579669}
-  - {fileID: 2027898707}
-  - {fileID: 116106989}
-  - {fileID: 454804591}
-  - {fileID: 2089831246}
+  - {fileID: 583811421}
+  - {fileID: 946249766}
+  - {fileID: 383228912}
+  - {fileID: 1540928265}
+  - {fileID: 1580074536}
   currentExpanedDegree: 0
   ammoTextUI: {fileID: 638413287}
   shootModeTextUI: {fileID: 1932995738}
@@ -4451,17 +4429,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 8176644016443000348, guid: 55e4eb5a2ddddba4dbc95c9c7e0d1af6, type: 3}
   m_PrefabInstance: {fileID: 8716106980301775529}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1217579669 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 4429181680297335966, guid: 55e4eb5a2ddddba4dbc95c9c7e0d1af6, type: 3}
-  m_PrefabInstance: {fileID: 8716106980301775529}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1295285497
 GameObject:
   m_ObjectHideFlags: 0
@@ -5576,17 +5543,6 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: XXX
---- !u!114 &2027898707 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 3239114725063890297, guid: 55e4eb5a2ddddba4dbc95c9c7e0d1af6, type: 3}
-  m_PrefabInstance: {fileID: 8716106980301775529}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &2041051130
 GameObject:
   m_ObjectHideFlags: 0
@@ -7415,7 +7371,12 @@ MonoBehaviour:
     reloadSoundAmmotLeft: {fileID: 0}
     reloadSoundOutOfAmmo: {fileID: 0}
     aimSound: {fileID: 0}
-  crossQuarterImgs: []
+  crossQuarterImgs:
+  - {fileID: 583811421}
+  - {fileID: 946249766}
+  - {fileID: 383228912}
+  - {fileID: 1540928265}
+  - {fileID: 1580074536}
   currentExpanedDegree: 0
   ammoTextUI: {fileID: 0}
   shootModeTextUI: {fileID: 0}
@@ -17571,7 +17532,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5559539581549269649, guid: 55e4eb5a2ddddba4dbc95c9c7e0d1af6, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7384967378120834872, guid: 55e4eb5a2ddddba4dbc95c9c7e0d1af6, type: 3}
       propertyPath: m_LocalPosition.x
@@ -17613,6 +17574,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8720605096052270214, guid: 55e4eb5a2ddddba4dbc95c9c7e0d1af6, type: 3}
+      propertyPath: crossQuarterImgs.Array.data[4]
+      value: 
+      objectReference: {fileID: 2089831246}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
