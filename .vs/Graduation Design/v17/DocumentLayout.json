@@ -40,9 +40,10 @@
               "RelativeDocumentMoniker": "Assets\\FSMClearSignals.cs",
               "ToolTip": "E:\\unity\\unity\\2022.3.17f1c1\\project\\Graduation Design\\Assets\\FSMClearSignals.cs",
               "RelativeToolTip": "Assets\\FSMClearSignals.cs",
-              "ViewState": "AgIAABMAAAAAAAAAAAA0wBwAAAAyAAAAAAAAAA==",
+              "ViewState": "AgIAABAAAAAAAAAAAAA0wBwAAAAyAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-02-04T14:17:55.375Z"
+              "WhenOpened": "2025-02-04T14:17:55.375Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
@@ -64,7 +65,7 @@
               "RelativeDocumentMoniker": "Assets\\Scripts\\Weapon\\Weapon_AutomaticGun.cs",
               "ToolTip": "E:\\unity\\unity\\2022.3.17f1c1\\project\\Graduation Design\\Assets\\Scripts\\Weapon\\Weapon_AutomaticGun.cs",
               "RelativeToolTip": "Assets\\Scripts\\Weapon\\Weapon_AutomaticGun.cs",
-              "ViewState": "AgIAADEBAAAAAAAAAAAAAE0BAABSAAAAAAAAAA==",
+              "ViewState": "AgIAAN4AAAAAAAAAAAAAAIoBAAAFAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-02-01T07:59:50.946Z",
               "EditorCaption": ""
@@ -77,9 +78,10 @@
               "RelativeDocumentMoniker": "Assets\\Scripts\\Weapon\\Weapon.cs",
               "ToolTip": "E:\\unity\\unity\\2022.3.17f1c1\\project\\Graduation Design\\Assets\\Scripts\\Weapon\\Weapon.cs",
               "RelativeToolTip": "Assets\\Scripts\\Weapon\\Weapon.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAtAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAhAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-02-01T07:56:43.561Z"
+              "WhenOpened": "2025-02-01T07:56:43.561Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",

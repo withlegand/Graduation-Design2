@@ -22,7 +22,7 @@ public class Weapon_AutomaticGun : Weapon
     private Animator animator;
     private PlayerController playerController;
     private Camera mainCamera;
-    private Camera gunCamera;
+    public Camera gunCamera;
 
     public bool IS_AUTORIFLE;//是否是自动武器
     public bool IS_SEMIGUN;//是否是半自动武器
@@ -33,11 +33,11 @@ public class Weapon_AutomaticGun : Weapon
     [Tooltip("子弹壳抛出的位置")] public Transform CasingBulletSpawnPoint;
 
     [Header("子弹预制体和特效")]
-    public Transform bulletPrefab;//
-    public Transform casingPrefab;//
+    public Transform bulletPrefab;//子弹
+    public Transform casingPrefab;//子弹抛壳
 
     [Header("枪械属性")]
-    [Tooltip("武器射程")] public float range;
+    [Tooltip("武器射程")] private float range;
     [Tooltip("武器射速")] public float fireRate;
     private float originRate;//原始射速
     private float SpreadFactor;//射击的一点偏移量
@@ -46,6 +46,7 @@ public class Weapon_AutomaticGun : Weapon
     [Tooltip("当前武器的每个弹匣子弹数")] public int bulletMag;
     [Tooltip("当前子弹数")] public int currentBullets;
     [Tooltip("备弹数")] public int bulletLeft;
+    public bool isSilencer;//是否装备消音器
 
     [Header("特效")]
     public Light muzzleFlashLight;//开火灯光
@@ -287,9 +288,9 @@ public class Weapon_AutomaticGun : Weapon
             print(hit.transform.gameObject.name);
         }
         //实例抛弹壳
-        Instantiate(casingPrefab,CasingBulletSpawnPoint.transform.position,CasingBulletSpawnPoint.transform.rotation);
-        
-        mainAudioSource.clip = SoundClips.shootSound;
+        Instantiate(casingPrefab,CasingBulletSpawnPoint.transform.position,CasingBulletSpawnPoint.transform.rotation);//实例抛弹壳
+        //根据是否装备消音器，切换不同的射击音效
+        mainAudioSource.clip = isSilencer?SoundClips.silencershootsound: SoundClips.shootSound;
         mainAudioSource.Play();//播放设射击音效
         fireTimer = 0;//重置计时器
         currentBullets--;//当前子弹数累减
@@ -319,6 +320,7 @@ public class Weapon_AutomaticGun : Weapon
         mainCamera.fieldOfView = Mathf.SmoothDamp(30,60,ref currentVelocity,0.1f);
         mainAudioSource.clip = SoundClips.aimSound;
         mainAudioSource.Play();
+        print("miaozhun");
     }
 
     //
