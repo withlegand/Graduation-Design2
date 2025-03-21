@@ -388,6 +388,7 @@
 "Assets/Low Poly FPS Pack/Third_Person_Character/Components/Scripts/ThirdPersonDemoLPFP.cs"
 "Assets/Scripts/Player/MouseLook.cs"
 "Assets/Scripts/Player/PlayerController.cs"
+"Assets/Scripts/Weapon/Inventory.cs"
 "Assets/Scripts/Weapon/Weapon.cs"
 "Assets/Scripts/Weapon/Weapon_AutomaticGun.cs"
 -langversion:9.0

@@ -90,6 +90,7 @@
     <Compile Include="Assets\Scripts\Weapon\Weapon_AutomaticGun.cs" />
     <Compile Include="Assets\Scripts\Player\MouseLook.cs" />
     <Compile Include="Assets\Low Poly FPS Pack\Third_Person_Character\Components\Plane_Demo_Scene_Components\Scripts\PlaneDoorLightsLPFP.cs" />
+    <Compile Include="Assets\Scripts\Weapon\Inventory.cs" />
     <Compile Include="Assets\Low Poly FPS Pack - Free (Sample)\Components\Scripts\Misc\LookAtCamera.cs" />
     <Compile Include="Assets\Low Poly FPS Pack\Third_Person_Character\Components\Plane_Demo_Scene_Components\Scripts\PropellerRotateLPFP.cs" />
   </ItemGroup>

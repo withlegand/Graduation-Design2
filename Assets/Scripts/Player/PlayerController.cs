@@ -118,10 +118,15 @@ public class PlayerController: MonoBehaviour
         if (!isCanCrouch) return;
         isJump = Input.GetKey(jumpinputname);
         //判断玩家在地面上 且此时在地面上 才能进行跳跃
-        if (isJump && isGround) 
+        if (isJump && isGround)
         {
             isGround = false;
             jumpForce = 5f;//设置跳跃力度
+        }
+        //
+        else if (!isJump && isGround)
+        {
+            isGround = false;
         }
 
         //此时按下跳跃键 人物跳起且不在地面上
@@ -130,6 +135,8 @@ public class PlayerController: MonoBehaviour
             jumpForce = jumpForce - fallForce * Time.deltaTime;//每秒将跳跃键进行累减 使其下落
             Vector3 jump = new Vector3(0, jumpForce * Time.deltaTime, 0);//将跳跃力度转换为V3坐标
             collisionFlags = characterController.Move(jump);//调用角色控制器移动方法 向上方法模拟跳跃
+            //Debug.Log("collisonFlags:" + collisionFlags);
+            //Debug.Log("characterController.isGround:" + characterController.isGrounded);
 
             //判断玩家在地面上
             //CollisionFlags.Below->在地面上
@@ -137,12 +144,12 @@ public class PlayerController: MonoBehaviour
             if (collisionFlags == CollisionFlags.Below)
             {
                 isGround = true;
-                jumpForce = 0f;
+                jumpForce = -2f;
             }
-            if (isGround && collisionFlags == CollisionFlags.None)
-            {
-                isGround = false;
-            }
+            //if (isGround && collisionFlags == CollisionFlags.None)
+            //{
+            //    isGround = false;
+            //}
         }
 
     }
