@@ -47,6 +47,7 @@ public class Weapon_AutomaticGun : Weapon
     [Tooltip("当前子弹数")] public int currentBullets;
     [Tooltip("备弹数")] public int bulletLeft;
     public bool isSilencer;//是否装备消音器
+    private int shootgunFragment = 8;//一次打出的子弹数
 
     [Header("特效")]
     public Light muzzleFlashLight;//开火灯光
@@ -86,6 +87,12 @@ public class Weapon_AutomaticGun : Weapon
     private bool GunShootInput;//根据全自动和半自动 射击的键位输入发生变化
     private int modeNum;//模式切换的一个中间参数（1，全自动模式；2，半自动模式）
     private string shootModeName;
+
+    [Header("狙击枪镜头设置")]
+    [Tooltip("狙击镜材质")] public Material scopeRenderMaterial;
+    [Tooltip("未进行瞄准时狙击镜颜色")] public Color fadeColor;
+    [Tooltip("瞄准时狙击镜颜色")] public Color defaultColor;
+
 
     private void Awake()
     {
@@ -188,6 +195,15 @@ public class Weapon_AutomaticGun : Weapon
 
         if (GunShootInput && currentBullets >0)
         {
+            //霰弹枪射击一次打出8次射线，其余枪械正常一次
+            if (IS_SEMIGUN && gameObject.name == "3")
+            {
+                shootgunFragment = 8;
+            }
+            else
+            {
+                shootgunFragment = 1;
+            }
             GunFire();//开枪射击
         }
 
@@ -202,9 +218,18 @@ public class Weapon_AutomaticGun : Weapon
         animator.SetBool("Walk", playerController.isWalk);
         
 
-        //两种换子弹动画
+        //两种换子弹动画（包括霰弹枪换弹逻辑）
         AnimatorStateInfo info = animator.GetCurrentAnimatorStateInfo(0);
-        if ((info.IsName("reload_ammo_left")) || info.IsName("reload_out_of_ammo"))
+        if ((info.IsName("reload_ammo_left")) || 
+            info.IsName("reload_out_of_ammo") ||
+            info.IsName("reload_open") ||
+            info.IsName("reload_insert 1") ||
+            info.IsName("reload_insert 2") ||
+            info.IsName("reload_insert 3") ||
+            info.IsName("reload_insert 4") ||
+            info.IsName("reload_insert 5") ||
+            info.IsName("reload_insert 6") 
+            )
         {
             isReloading = true;
         }
@@ -213,6 +238,19 @@ public class Weapon_AutomaticGun : Weapon
             isReloading = false;
         }
 
+        //解决多了一次换弹动画问题
+        if ((info.IsName("reload_insert 1") ||
+            info.IsName("reload_insert 2") ||
+            info.IsName("reload_insert 3") ||
+            info.IsName("reload_insert 4") ||
+            info.IsName("reload_insert 5") ||
+            info.IsName("reload_insert 6")) && 
+            currentBullets == bulletMag)
+        {
+            //当前霰弹枪子弹填装完毕，随时结束换弹判断
+            animator.Play("reload_close");
+            isReloading = false;
+        }
 
         //按下换单键,当前子弹数小于弹匣子弹数，备弹量大于0
         //判断现在没有换弹的时候 才运行播放换弹动画
@@ -275,18 +313,35 @@ public class Weapon_AutomaticGun : Weapon
             animator.Play("aim_fire", 0, 0);
         }
 
-        RaycastHit hit;
-        Vector3 shootDirection = ShootPoint.forward;//向前方射击
-        shootDirection = shootDirection + ShootPoint.TransformDirection(new Vector3(Random.Range(-SpreadFactor,SpreadFactor), Random.Range(-SpreadFactor, SpreadFactor)));
-        if (Physics.Raycast(ShootPoint.position,shootDirection,out hit,range))
+        for (int i = 0; i < shootgunFragment; i++)
         {
-            Transform bullet;
+            RaycastHit hit;
+            Vector3 shootDirection = ShootPoint.forward;//向前方射击
+            shootDirection = shootDirection + ShootPoint.TransformDirection(new Vector3(Random.Range(-SpreadFactor, SpreadFactor), Random.Range(-SpreadFactor, SpreadFactor)));
+            
+            //射线检测
+            if (Physics.Raycast(ShootPoint.position, shootDirection, out hit, range))
+            {
+                Transform bullet;
 
-            bullet =  (Transform)Instantiate(bulletPrefab,BulletShootPoint.transform.position,BulletShootPoint.transform.rotation);
-            //给子弹拖尾一个向前的速度力(加上射线打出去的偏移值）
-            bullet.GetComponent<Rigidbody>().velocity = (bullet.transform.forward + shootDirection) * bulletForce;
-            print(hit.transform.gameObject.name);
+                if (IS_AUTORIFLE||IS_SEMIGUN && gameObject.name == "2")
+                {
+                    bullet = (Transform)Instantiate(bulletPrefab, BulletShootPoint.transform.position, BulletShootPoint.transform.rotation);
+                }
+                else
+                {
+                    //霰弹枪限制下，将子弹限制位置设定到hit.point
+                    bullet = Instantiate(bulletPrefab,hit.point,Quaternion.FromToRotation(Vector3.up,hit.normal));
+                }
+                
+                //给子弹拖尾一个向前的速度力(加上射线打出去的偏移值）
+                bullet.GetComponent<Rigidbody>().velocity = (bullet.transform.forward + shootDirection) * bulletForce;
+                print(hit.transform.gameObject.name);
+            }
         }
+        
+
+
         //实例抛弹壳
         Instantiate(casingPrefab,CasingBulletSpawnPoint.transform.position,CasingBulletSpawnPoint.transform.rotation);//实例抛弹壳
         //根据是否装备消音器，切换不同的射击音效
@@ -315,12 +370,20 @@ public class Weapon_AutomaticGun : Weapon
         {
             crossQuarterImgs[i].gameObject.SetActive(false);
         }
+        //狙击枪瞄准时，改变guncamera的视野和瞄准镜的颜色
+        if (IS_SEMIGUN && (gameObject.name=="4"))
+        {
+            print("bianse");
+            scopeRenderMaterial.color = defaultColor;
+            gunCamera.fieldOfView = 15;
+        }
 
         //瞄准时摄像机视野变近
         mainCamera.fieldOfView = Mathf.SmoothDamp(30,60,ref currentVelocity,0.1f);
         mainAudioSource.clip = SoundClips.aimSound;
         mainAudioSource.Play();
         print("miaozhun");
+        print(gameObject.name);
     }
 
     //
@@ -333,6 +396,13 @@ public class Weapon_AutomaticGun : Weapon
         }
 
         
+        if (IS_SEMIGUN && (gameObject.name == "4"))
+        {
+            scopeRenderMaterial.color = fadeColor;
+            gunCamera.fieldOfView = 35;
+        }
+
+
         mainCamera.fieldOfView = Mathf.SmoothDamp(60, 30, ref currentVelocity, 0.5f);
         mainAudioSource.clip = SoundClips.aimSound;
         mainAudioSource.Play();
@@ -340,20 +410,31 @@ public class Weapon_AutomaticGun : Weapon
 
     public override void DoReloadAnimation()
     {
-        if (currentBullets > 0 && bulletLeft > 0)
+        if (!(IS_SEMIGUN && (gameObject.name == "3" || gameObject.name == "4")))
         {
-            animator.Play("reload_ammo_left",0,0);
-            Reload();
-            mainAudioSource.clip =SoundClips.reloadSoundAmmotLeft;
-            mainAudioSource.Play();
+            if (currentBullets > 0 && bulletLeft > 0)
+            {
+                animator.Play("reload_ammo_left",0,0);
+                Reload();
+                mainAudioSource.clip =SoundClips.reloadSoundAmmotLeft;
+                mainAudioSource.Play();
+            }
+            if (currentBullets == 0 && bulletLeft > 0)
+            {
+                animator.Play("reload_out_of_ammo", 0, 0);
+                Reload();
+                mainAudioSource.clip = SoundClips.reloadSoundOutOfAmmo;
+                mainAudioSource.Play();
+            }
         }
-        if (currentBullets == 0 && bulletLeft > 0)
+        else
         {
-            animator.Play("reload_out_of_ammo", 0, 0);
-            Reload();
-            mainAudioSource.clip = SoundClips.reloadSoundOutOfAmmo;
-            mainAudioSource.Play();
+            
+            if (currentBullets == bulletMag) return;
+            //霰弹枪换子弹动画触发
+            animator.SetTrigger("shootgun_reload");
         }
+        
     }
 
     
@@ -367,6 +448,23 @@ public class Weapon_AutomaticGun : Weapon
         bulletLeft -= bulletToReduce;//备弹减少
         currentBullets += bulletToReduce;//当前子弹增加
         UpdateAmmoUI();
+    }
+
+    //霰弹枪换弹逻辑，在ReloadAmmoState脚本里调用
+    public void ShootGunReload()
+    {
+        if (currentBullets < bulletMag)
+        {
+            currentBullets++;
+            bulletLeft--;
+            UpdateAmmoUI();
+        }
+        else
+        {
+            animator.Play("reload_close");
+            return;
+        }
+        if(bulletLeft <= 0) return;
     }
     
     public override void ExpaningCrossUpdate(float expandDegree)

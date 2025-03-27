@@ -7,8 +7,20 @@
       "RelativeMoniker": "D:0:0:{298EDE1E-D913-A9E0-DF0B-C84E3B183C3F}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\player\\playercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{298EDE1E-D913-A9E0-DF0B-C84E3B183C3F}|Assembly-CSharp.csproj|e:\\unity\\unity\\2022.3.17f1c1\\project\\graduation design\\assets\\scripts\\weapon\\weapon_automaticgun.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{298EDE1E-D913-A9E0-DF0B-C84E3B183C3F}|Assembly-CSharp.csproj|e:\\unity\\unity\\2022.3.17f1c1\\project\\graduation design\\assets\\scripts\\player\\pickupitem.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{298EDE1E-D913-A9E0-DF0B-C84E3B183C3F}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\player\\pickupitem.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{298EDE1E-D913-A9E0-DF0B-C84E3B183C3F}|Assembly-CSharp.csproj|E:\\unity\\unity\\2022.3.17f1c1\\project\\Graduation Design\\assets\\scripts\\weapon\\inventory.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{298EDE1E-D913-A9E0-DF0B-C84E3B183C3F}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\weapon\\inventory.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{298EDE1E-D913-A9E0-DF0B-C84E3B183C3F}|Assembly-CSharp.csproj|E:\\unity\\unity\\2022.3.17f1c1\\project\\Graduation Design\\assets\\scripts\\weapon\\weapon_automaticgun.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{298EDE1E-D913-A9E0-DF0B-C84E3B183C3F}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\weapon\\weapon_automaticgun.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{298EDE1E-D913-A9E0-DF0B-C84E3B183C3F}|Assembly-CSharp.csproj|E:\\unity\\unity\\2022.3.17f1c1\\project\\Graduation Design\\assets\\reloadammostate.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{298EDE1E-D913-A9E0-DF0B-C84E3B183C3F}|Assembly-CSharp.csproj|solutionrelative:assets\\reloadammostate.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{298EDE1E-D913-A9E0-DF0B-C84E3B183C3F}|Assembly-CSharp.csproj|E:\\unity\\unity\\2022.3.17f1c1\\project\\Graduation Design\\assets\\fsmclearsignals.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -30,17 +42,55 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 1,
+          "SelectedChildIndex": 4,
           "Children": [
             {
               "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "PickUpItem.cs",
+              "DocumentMoniker": "E:\\unity\\unity\\2022.3.17f1c1\\project\\Graduation Design\\Assets\\Scripts\\Player\\PickUpItem.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\Player\\PickUpItem.cs",
+              "ToolTip": "E:\\unity\\unity\\2022.3.17f1c1\\project\\Graduation Design\\Assets\\Scripts\\Player\\PickUpItem.cs",
+              "RelativeToolTip": "Assets\\Scripts\\Player\\PickUpItem.cs",
+              "ViewState": "AgIAAA4AAAAAAAAAAAAswB8AAAAgAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-25T12:20:03.036Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "ReloadAmmoState.cs",
+              "DocumentMoniker": "E:\\unity\\unity\\2022.3.17f1c1\\project\\Graduation Design\\Assets\\ReloadAmmoState.cs",
+              "RelativeDocumentMoniker": "Assets\\ReloadAmmoState.cs",
+              "ToolTip": "E:\\unity\\unity\\2022.3.17f1c1\\project\\Graduation Design\\Assets\\ReloadAmmoState.cs",
+              "RelativeToolTip": "Assets\\ReloadAmmoState.cs",
+              "ViewState": "AgIAABkAAAAAAAAAAAAYwCUAAAAYAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-24T12:47:12.895Z"
+            },
+            {
+              "$type": "Document",
               "DocumentIndex": 2,
+              "Title": "Inventory.cs",
+              "DocumentMoniker": "E:\\unity\\unity\\2022.3.17f1c1\\project\\Graduation Design\\Assets\\Scripts\\Weapon\\Inventory.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\Weapon\\Inventory.cs",
+              "ToolTip": "E:\\unity\\unity\\2022.3.17f1c1\\project\\Graduation Design\\Assets\\Scripts\\Weapon\\Inventory.cs",
+              "RelativeToolTip": "Assets\\Scripts\\Weapon\\Inventory.cs",
+              "ViewState": "AgIAAGQAAAAAAAAAAAAswIcAAAAuAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-21T04:09:45.127Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
               "Title": "FSMClearSignals.cs",
               "DocumentMoniker": "E:\\unity\\unity\\2022.3.17f1c1\\project\\Graduation Design\\Assets\\FSMClearSignals.cs",
               "RelativeDocumentMoniker": "Assets\\FSMClearSignals.cs",
               "ToolTip": "E:\\unity\\unity\\2022.3.17f1c1\\project\\Graduation Design\\Assets\\FSMClearSignals.cs",
               "RelativeToolTip": "Assets\\FSMClearSignals.cs",
-              "ViewState": "AgIAABAAAAAAAAAAAAA0wBwAAAAyAAAAAAAAAA==",
+              "ViewState": "AgIAABcAAAAAAAAAAAAswCQAAAAtAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-02-04T14:17:55.375Z"
             },
@@ -52,27 +102,26 @@
               "RelativeDocumentMoniker": "Assets\\Scripts\\Player\\PlayerController.cs",
               "ToolTip": "E:\\unity\\unity\\2022.3.17f1c1\\project\\Graduation Design\\Assets\\Scripts\\Player\\PlayerController.cs",
               "RelativeToolTip": "Assets\\Scripts\\Player\\PlayerController.cs",
-              "ViewState": "AgIAAH8AAAAAAAAAAAAAAIoAAABWAAAAAAAAAA==",
+              "ViewState": "AgIAANkAAAAAAAAAAAAAAN4AAABGAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-02-02T11:32:18.223Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 3,
               "Title": "Weapon_AutomaticGun.cs",
               "DocumentMoniker": "E:\\unity\\unity\\2022.3.17f1c1\\project\\Graduation Design\\Assets\\Scripts\\Weapon\\Weapon_AutomaticGun.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\Weapon\\Weapon_AutomaticGun.cs",
               "ToolTip": "E:\\unity\\unity\\2022.3.17f1c1\\project\\Graduation Design\\Assets\\Scripts\\Weapon\\Weapon_AutomaticGun.cs",
               "RelativeToolTip": "Assets\\Scripts\\Weapon\\Weapon_AutomaticGun.cs",
-              "ViewState": "AgIAAB0BAAAAAAAAAAAAAIoBAAAFAAAAAAAAAA==",
+              "ViewState": "AgIAAIEBAAAAAAAAAAAAAHgBAAAlAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-02-01T07:59:50.946Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-02-01T07:59:50.946Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 6,
               "Title": "Weapon.cs",
               "DocumentMoniker": "E:\\unity\\unity\\2022.3.17f1c1\\project\\Graduation Design\\Assets\\Scripts\\Weapon\\Weapon.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\Weapon\\Weapon.cs",
@@ -84,7 +133,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 7,
               "Title": "MouseLook.cs",
               "DocumentMoniker": "E:\\unity\\unity\\2022.3.17f1c1\\project\\Graduation Design\\Assets\\Scripts\\MouseLook.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\MouseLook.cs",

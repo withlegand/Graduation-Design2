@@ -113,12 +113,13 @@ public class Inventory : MonoBehaviour
         }
         else
         {
-            if(weapons.Count <3)
-            {
+            //if(weapons.Count <3)
+            //{
+
                 weapons.Add(weapon);
                 ChangeWeapon(currentWeaponID + 1);//ÏÔÊ¾ÎäÆ÷
                 weapon.gameObject.SetActive(true);
-            }
+            //}
         }
     }
 

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.UIElements;
 
 public class PlayerController: MonoBehaviour
@@ -14,6 +15,7 @@ public class PlayerController: MonoBehaviour
     [Tooltip("行走速度")]public float walkSpeed;
     [Tooltip("奔跑速度")] public float runSpeed;
     [Tooltip("下蹲行走速度")] public float crouchSpeed;
+    [Tooltip("玩家生命值")] public float playerHealth;
 
     [Tooltip("跳跃力")] public float jumpForce;
     [Tooltip("下落力")] public float fallForce;
@@ -34,25 +36,33 @@ public class PlayerController: MonoBehaviour
     public bool isGround;//判断挖安家是否在地面上
     public bool isCanCrouch;//判断玩家是否可以下蹲
     public bool isCrouching;//判断玩家是否在下蹲
+    private bool playerIsDead;//判断玩家是否死亡
+    private bool isDemage;//判断玩家是否受伤
 
     public LayerMask crouchLayerMask;
+    public Text playerHealthUI;
 
     [Header("音效")]
     [Tooltip("行走音效")]public AudioClip walkSound;
     [Tooltip("奔跑音效")] public AudioClip runSound;
+
+    private Inventory Inventory;
 
     // Start is called before the first frame update
     void Start()
     {
         characterController = GetComponent<CharacterController>();
         audioSource = GetComponent<AudioSource>();
+        Inventory = GetComponentInChildren<Inventory>();
         walkSpeed = 4f;
         runSpeed = 6f;
         crouchSpeed = 2f;
         jumpForce = 0f;
         fallForce = 10f;
+        playerHealth = 100f;
         crouchHeight = 1f;
         standHeight = characterController.height;
+        playerHealthUI.text = "生命值" + playerHealth;
     }
 
     // Update is called once per frame
@@ -210,6 +220,37 @@ public class PlayerController: MonoBehaviour
             }
         }
     }
+
+    public void PickUpWeapon(int itemID,GameObject weapon)
+    {
+        //捡到武器后，在武器库里添加，否则补充备弹
+        if (Inventory.weapons.Contains(weapon))
+        {
+            weapon.GetComponent<Weapon_AutomaticGun>().bulletLeft = weapon.GetComponent<Weapon_AutomaticGun>().bulletMag * 5;
+            weapon.GetComponent<Weapon_AutomaticGun>().UpdateAmmoUI();
+            print("集合里存在此枪，补充备弹");
+            return;
+        }
+        else
+        {
+            Inventory.AddWeapon(weapon);
+        }
+    }
+
+    public void PlayerHealth(float demage)
+    {
+        playerHealth -= demage;
+        isDemage = true;
+        playerHealthUI.text = "生命值" + playerHealth;
+        if (playerHealth <= 0)
+        {
+            playerIsDead = true;
+            playerHealthUI.text = "玩家死亡";
+            Time.timeScale = 0;//游戏暂停
+        }
+    }
+
+
     public enum MovementsState
     {
         walking,
