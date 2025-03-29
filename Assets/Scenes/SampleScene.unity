@@ -10120,8 +10120,12 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 1
   playerHealthUI: {fileID: 1184982749}
+  airAcceleration: 10
+  maxAirSpeed: 3
+  jumpHeight: 1
   walkSound: {fileID: 8300000, guid: 5ac86ac5747770349a6c124f36d233e1, type: 3}
   runSound: {fileID: 8300000, guid: 8a49c532c25ef274781a01f02cd8b425, type: 3}
+  Inventory: {fileID: 0}
 --- !u!82 &1374295807
 AudioSource:
   m_ObjectHideFlags: 0

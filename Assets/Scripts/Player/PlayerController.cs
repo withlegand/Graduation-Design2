@@ -4,6 +4,13 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.UIElements;
 
+/// <summary>
+/// 玩家核心控制器
+/// 功能：
+/// 1. 移动控制（行走/奔跑/下蹲）
+/// 2. 跳跃和下蹲逻辑
+/// 3. 状态管理（生命值、音效、武器交互）
+/// </summary>
 public class PlayerController: MonoBehaviour
 {
     private CharacterController characterController;
@@ -42,11 +49,20 @@ public class PlayerController: MonoBehaviour
     public LayerMask crouchLayerMask;
     public Text playerHealthUI;
 
+    [Header("空中控制参数")]
+    [Tooltip("空中移动加速度")] public float airAcceleration = 10f;   // 建议值：5~10
+    [Tooltip("最大空速")] public float maxAirSpeed = 3f;           // 建议值：略低于地面奔跑速度
+    private Vector3 currentVelocity; // 当前实际速度（包含惯性）
+    private Vector3 wishDir;         // 输入方向（理想移动方向）
+    public float jumpHeight = 1f;
+
     [Header("音效")]
     [Tooltip("行走音效")]public AudioClip walkSound;
     [Tooltip("奔跑音效")] public AudioClip runSound;
 
-    private Inventory Inventory;
+    
+    public Inventory Inventory;   
+
 
     // Start is called before the first frame update
     void Start()
@@ -54,14 +70,14 @@ public class PlayerController: MonoBehaviour
         characterController = GetComponent<CharacterController>();
         audioSource = GetComponent<AudioSource>();
         Inventory = GetComponentInChildren<Inventory>();
-        walkSpeed = 4f;
-        runSpeed = 6f;
-        crouchSpeed = 2f;
+        walkSpeed = 2f;
+        runSpeed = 3f;
+        crouchSpeed = 1f;
         jumpForce = 0f;
         fallForce = 10f;
         playerHealth = 100f;
         crouchHeight = 1f;
-        standHeight = characterController.height;
+        standHeight = characterController.height;//初始站立高度
         playerHealthUI.text = "生命值" + playerHealth;
     }
 
@@ -79,8 +95,10 @@ public class PlayerController: MonoBehaviour
         }
 
         jump();
-        PlayerFootSoundSet();
+        PlayerFootSoundSet();//脚步声控制
         Moving();
+
+        
     }
 
     public void Moving()
@@ -92,21 +110,40 @@ public class PlayerController: MonoBehaviour
         isRun = Input.GetKey(runinputname);
         isWalk = (Mathf.Abs(h) > 0 || Mathf.Abs(v) > 0) ? true : false;
 
+        // 计算输入方向（理想方向）
+        wishDir = (transform.right * h + transform.forward * v).normalized;
 
         if (isRun && isGround && isCanCrouch && !isCrouching)
         {
             state = MovementsState.runing;
+            currentVelocity = wishDir *  runSpeed;
             Speed = runSpeed;
             print("run");
         }
         else if (isGround) //正常行走
         {
             state = MovementsState.walking;
+            currentVelocity = wishDir * walkSpeed;
             Speed = walkSpeed;
             if (isCrouching)//下蹲行走
             {
                 state = MovementsState.crouching;
+                currentVelocity = wishDir * crouchSpeed;
                 Speed = crouchSpeed;
+            }
+        }
+        if(!isGround)
+        {
+            // 空中移动：通过加速度逐步调整方向
+            Vector3 speedAddition = wishDir * airAcceleration * Time.deltaTime;
+            currentVelocity += speedAddition;
+
+            // 限制水平速度不超过最大值
+            Vector3 horizontalVel = new Vector3(currentVelocity.x, 0, currentVelocity.z);
+            if (horizontalVel.magnitude > maxAirSpeed)
+            {
+                horizontalVel = horizontalVel.normalized * maxAirSpeed;
+                currentVelocity = new Vector3(horizontalVel.x, currentVelocity.y, horizontalVel.z);
             }
         }
 
@@ -117,10 +154,22 @@ public class PlayerController: MonoBehaviour
         //}
 
         
-        //设置人物移动方向（将速度进行规范化，放置人物斜向走时速度变大）
+        //设置人物移动方向（将速度进行规范化，防止人物斜向走时速度变大）
         moveDirection = (transform.right* h +  transform.forward* v).normalized;
-        characterController.Move(moveDirection*Speed*Time.deltaTime);//人物移动
+        currentVelocity.y += Physics.gravity.y * Time.deltaTime;
+        characterController.Move(currentVelocity * Time.deltaTime);//人物移动
 
+        // 执行移动并检测碰撞
+        CollisionFlags flags = characterController.Move(currentVelocity * Time.deltaTime);
+
+        // 更新地面状态
+        isGround = (flags & CollisionFlags.Below) != 0;
+
+        // 落地后重置垂直速度
+        if (isGround && currentVelocity.y < 0)
+        {
+            currentVelocity.y = 0;
+        }
     }
 
     public void jump()
@@ -130,38 +179,11 @@ public class PlayerController: MonoBehaviour
         //判断玩家在地面上 且此时在地面上 才能进行跳跃
         if (isJump && isGround)
         {
-            isGround = false;
-            jumpForce = 5f;//设置跳跃力度
-        }
-        //
-        else if (!isJump && isGround)
-        {
+            
+            currentVelocity.y = Mathf.Sqrt(2 * Mathf.Abs(Physics.gravity.y) * jumpHeight);
             isGround = false;
         }
-
-        //此时按下跳跃键 人物跳起且不在地面上
-        if (!isGround)
-        {
-            jumpForce = jumpForce - fallForce * Time.deltaTime;//每秒将跳跃键进行累减 使其下落
-            Vector3 jump = new Vector3(0, jumpForce * Time.deltaTime, 0);//将跳跃力度转换为V3坐标
-            collisionFlags = characterController.Move(jump);//调用角色控制器移动方法 向上方法模拟跳跃
-            //Debug.Log("collisonFlags:" + collisionFlags);
-            //Debug.Log("characterController.isGround:" + characterController.isGrounded);
-
-            //判断玩家在地面上
-            //CollisionFlags.Below->在地面上
-
-            if (collisionFlags == CollisionFlags.Below)
-            {
-                isGround = true;
-                jumpForce = -2f;
-            }
-            //if (isGround && collisionFlags == CollisionFlags.None)
-            //{
-            //    isGround = false;
-            //}
-        }
-
+        
     }
 
     public void CanCrouch()
@@ -221,7 +243,7 @@ public class PlayerController: MonoBehaviour
         }
     }
 
-    public void PickUpWeapon(int itemID,GameObject weapon)
+    public void PickUpWeapon(int itemID, GameObject weapon)
     {
         //捡到武器后，在武器库里添加，否则补充备弹
         if (Inventory.weapons.Contains(weapon))
@@ -236,6 +258,8 @@ public class PlayerController: MonoBehaviour
             Inventory.AddWeapon(weapon);
         }
     }
+
+
 
     public void PlayerHealth(float demage)
     {

@@ -305,7 +305,7 @@ public class Weapon_AutomaticGun : Weapon
         if (!isAiming)
         {
             //播放普通开火动画（使用动画的淡入淡出效果）
-            animator.CrossFadeInFixedTime("Fire", 0.1f);
+            animator.CrossFadeInFixedTime("fire", 0.1f);
         }
         else
         {
