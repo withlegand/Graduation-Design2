@@ -1,0 +1,105 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "E:\\unity\\unity\\2022.3.17f1c1\\project\\Graduation Design2\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{297E5428-22D3-755C-1F6E-CCB65393276B}|Assembly-CSharp.csproj|e:\\unity\\unity\\2022.3.17f1c1\\project\\graduation design2\\assets\\scripts\\player\\playercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{297E5428-22D3-755C-1F6E-CCB65393276B}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\player\\playercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{297E5428-22D3-755C-1F6E-CCB65393276B}|Assembly-CSharp.csproj|e:\\unity\\unity\\2022.3.17f1c1\\project\\graduation design2\\assets\\scripts\\weapon\\weapon_automaticgun.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{297E5428-22D3-755C-1F6E-CCB65393276B}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\weapon\\weapon_automaticgun.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{297E5428-22D3-755C-1F6E-CCB65393276B}|Assembly-CSharp.csproj|e:\\unity\\unity\\2022.3.17f1c1\\project\\graduation design2\\assets\\scripts\\player\\pickupitem.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{297E5428-22D3-755C-1F6E-CCB65393276B}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\player\\pickupitem.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{297E5428-22D3-755C-1F6E-CCB65393276B}|Assembly-CSharp.csproj|e:\\unity\\unity\\2022.3.17f1c1\\project\\graduation design2\\assets\\scripts\\weapon\\inventory.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{297E5428-22D3-755C-1F6E-CCB65393276B}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\weapon\\inventory.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{297E5428-22D3-755C-1F6E-CCB65393276B}|Assembly-CSharp.csproj|e:\\unity\\unity\\2022.3.17f1c1\\project\\graduation design2\\assets\\scripts\\weapon\\weapon.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{297E5428-22D3-755C-1F6E-CCB65393276B}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\weapon\\weapon.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "PlayerController.cs",
+              "DocumentMoniker": "E:\\unity\\unity\\2022.3.17f1c1\\project\\Graduation Design2\\Assets\\Scripts\\Player\\PlayerController.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\Player\\PlayerController.cs",
+              "ToolTip": "E:\\unity\\unity\\2022.3.17f1c1\\project\\Graduation Design2\\Assets\\Scripts\\Player\\PlayerController.cs",
+              "RelativeToolTip": "Assets\\Scripts\\Player\\PlayerController.cs",
+              "ViewState": "AgIAAF4AAAAAAAAAAAA1wGcAAAAWAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-30T08:02:25.219Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "PickUpItem.cs",
+              "DocumentMoniker": "E:\\unity\\unity\\2022.3.17f1c1\\project\\Graduation Design2\\Assets\\Scripts\\Player\\PickUpItem.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\Player\\PickUpItem.cs",
+              "ToolTip": "E:\\unity\\unity\\2022.3.17f1c1\\project\\Graduation Design2\\Assets\\Scripts\\Player\\PickUpItem.cs*",
+              "RelativeToolTip": "Assets\\Scripts\\Player\\PickUpItem.cs*",
+              "ViewState": "AgIAACYAAAAAAAAAAAAywDYAAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-30T07:55:45.791Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "Weapon.cs",
+              "DocumentMoniker": "E:\\unity\\unity\\2022.3.17f1c1\\project\\Graduation Design2\\Assets\\Scripts\\Weapon\\Weapon.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\Weapon\\Weapon.cs",
+              "ToolTip": "E:\\unity\\unity\\2022.3.17f1c1\\project\\Graduation Design2\\Assets\\Scripts\\Weapon\\Weapon.cs",
+              "RelativeToolTip": "Assets\\Scripts\\Weapon\\Weapon.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-30T07:45:19.142Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Weapon_AutomaticGun.cs",
+              "DocumentMoniker": "E:\\unity\\unity\\2022.3.17f1c1\\project\\Graduation Design2\\Assets\\Scripts\\Weapon\\Weapon_AutomaticGun.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\Weapon\\Weapon_AutomaticGun.cs",
+              "ToolTip": "E:\\unity\\unity\\2022.3.17f1c1\\project\\Graduation Design2\\Assets\\Scripts\\Weapon\\Weapon_AutomaticGun.cs",
+              "RelativeToolTip": "Assets\\Scripts\\Weapon\\Weapon_AutomaticGun.cs",
+              "ViewState": "AgIAAAUCAAAAAAAAAAAAAGAAAAApAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-30T07:44:45.201Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "Inventory.cs",
+              "DocumentMoniker": "E:\\unity\\unity\\2022.3.17f1c1\\project\\Graduation Design2\\Assets\\Scripts\\Weapon\\Inventory.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\Weapon\\Inventory.cs",
+              "ToolTip": "E:\\unity\\unity\\2022.3.17f1c1\\project\\Graduation Design2\\Assets\\Scripts\\Weapon\\Inventory.cs",
+              "RelativeToolTip": "Assets\\Scripts\\Weapon\\Inventory.cs",
+              "ViewState": "AgIAACIAAAAAAAAAAAAAACgAAAAzAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-30T07:33:00.281Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

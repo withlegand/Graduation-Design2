@@ -243,20 +243,9 @@ public class PlayerController: MonoBehaviour
         }
     }
 
-    public void PickUpWeapon(int itemID, GameObject weapon)
+    public void PickUpWeapon(int itemID, GameObject weapon, Weapon_AutomaticGun.WeaponType type)
     {
-        //捡到武器后，在武器库里添加，否则补充备弹
-        if (Inventory.weapons.Contains(weapon))
-        {
-            weapon.GetComponent<Weapon_AutomaticGun>().bulletLeft = weapon.GetComponent<Weapon_AutomaticGun>().bulletMag * 5;
-            weapon.GetComponent<Weapon_AutomaticGun>().UpdateAmmoUI();
-            print("集合里存在此枪，补充备弹");
-            return;
-        }
-        else
-        {
-            Inventory.AddWeapon(weapon);
-        }
+        Inventory.AddWeapon(weapon, type);
     }
 
 

@@ -638,8 +638,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8c463c59ff5c85248a29c65ba215d69a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weapons: []
-  currentWeaponID: 0
+  primaryWeapons: []
+  secondaryWeapons: []
+  meleeWeapons: []
 --- !u!1 &467308395
 GameObject:
   m_ObjectHideFlags: 0
@@ -2980,6 +2981,7 @@ MonoBehaviour:
   scopeRenderMaterial: {fileID: 0}
   fadeColor: {r: 0, g: 0, b: 0, a: 0}
   defaultColor: {r: 0, g: 0, b: 0, a: 0}
+  weaponType: 0
 --- !u!137 &751867488
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 0
@@ -16708,6 +16710,10 @@ PrefabInstance:
       propertyPath: m_IsTrigger
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 8803304699299475940, guid: f22f6568fe020b548a06a38597ce74a9, type: 3}
+      propertyPath: weaponType
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -18490,6 +18496,7 @@ MonoBehaviour:
   scopeRenderMaterial: {fileID: 2100000, guid: e42b5b324c3b7cf499d473a7f9762f64, type: 2}
   fadeColor: {r: 0, g: 0, b: 0, a: 0}
   defaultColor: {r: 1, g: 1, b: 1, a: 0}
+  weaponType: 0
 --- !u!1 &2867303440444127311
 GameObject:
   m_ObjectHideFlags: 0
@@ -18747,6 +18754,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3201987334005970646, guid: b40424e18add7bb4f90cd0d0b3b659f0, type: 3}
+      propertyPath: weaponType
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4666363682442427460, guid: b40424e18add7bb4f90cd0d0b3b659f0, type: 3}
       propertyPath: m_Name
       value: 2
@@ -18949,6 +18960,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemID: 0
+  weaponType: 0
 --- !u!4 &4580447810101494675 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7643454521056228483, guid: 46a067ee0c95420409897fe687958230, type: 3}

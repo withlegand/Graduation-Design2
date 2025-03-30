@@ -7,6 +7,7 @@ public class PickUpItem : MonoBehaviour
 {
     [Tooltip("武器旋转的速度")] private float rotateSpeed;
     [Tooltip("武器编号")]public int itemID;
+    [Tooltip("武器类型")] public Weapon_AutomaticGun.WeaponType weaponType;
     private GameObject weaponModel;
     // Start is called before the first frame update
     void Start()
@@ -22,13 +23,14 @@ public class PickUpItem : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.tag =="Player")
+        if (other.tag == "Player")
         {
             PlayerController player = other.GetComponent<PlayerController>();
-            //
-            weaponModel = GameObject.Find("Player/Assult_Rife_Arm/inventory").gameObject.transform.GetChild(itemID).gameObject;
-            //Debug.Log(weaponModel.name);
-            player.PickUpWeapon(itemID,weaponModel);
+            weaponModel = GameObject.Find("Player/Assult_Rife_Arm/inventory").transform.GetChild(itemID).gameObject;
+            
+            var weaponScript = weaponModel.GetComponent<Weapon_AutomaticGun>();
+
+            player.PickUpWeapon(itemID, weaponModel, weaponScript.weaponType);
             Destroy(gameObject);
         }
     }

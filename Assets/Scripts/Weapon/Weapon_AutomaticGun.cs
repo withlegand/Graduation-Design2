@@ -93,7 +93,8 @@ public class Weapon_AutomaticGun : Weapon
     [Tooltip("未进行瞄准时狙击镜颜色")] public Color fadeColor;
     [Tooltip("瞄准时狙击镜颜色")] public Color defaultColor;
 
-
+    [Header("武器类型")]
+    public WeaponType weaponType;
     private void Awake()
     {
         animator = GetComponent<Animator>();
@@ -515,4 +516,11 @@ public class Weapon_AutomaticGun : Weapon
         AutoRifle,
         SemiGun
     };
+
+    public enum WeaponType
+    {
+        Primary,
+        Secondary,
+        Melee
+    }
 }
