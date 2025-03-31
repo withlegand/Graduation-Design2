@@ -42,8 +42,7 @@
               "RelativeToolTip": "Assets\\Scripts\\Player\\PlayerController.cs",
               "ViewState": "AgIAAPEAAAAAAAAAAAAAAPUAAABgAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-30T08:02:25.219Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-03-30T08:02:25.219Z"
             },
             {
               "$type": "Document",
@@ -55,8 +54,7 @@
               "RelativeToolTip": "Assets\\Scripts\\Player\\PickUpItem.cs",
               "ViewState": "AgIAABMAAAAAAAAAAAA0wB0AAAAMAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-30T07:55:45.791Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-03-30T07:55:45.791Z"
             },
             {
               "$type": "Document",
@@ -90,7 +88,7 @@
               "RelativeDocumentMoniker": "Assets\\Scripts\\Weapon\\Inventory.cs",
               "ToolTip": "E:\\unity\\unity\\2022.3.17f1c1\\project\\Graduation Design2\\Assets\\Scripts\\Weapon\\Inventory.cs",
               "RelativeToolTip": "Assets\\Scripts\\Weapon\\Inventory.cs",
-              "ViewState": "AgIAACAAAAAAAAAAAAAAACoAAAAUAAAAAAAAAA==",
+              "ViewState": "AgIAACIAAAAAAAAAAAAAACoAAAAUAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-03-30T07:33:00.281Z",
               "EditorCaption": ""
