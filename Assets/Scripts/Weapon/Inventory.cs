@@ -15,14 +15,21 @@ public class Inventory : MonoBehaviour
     //当前武器编号
     //public int currentWeaponID  ;
     // 当前装备的武器
-    private GameObject currentPrimary;
-    private GameObject currentSecondary;
-    private GameObject currentMelee;
+    public GameObject currentPrimary;
+    public GameObject currentSecondary;
+    public GameObject currentMelee;
 
     // 当前激活的武器类型
     public enum ActiveWeaponType { None, Primary, Secondary, Melee }
     private ActiveWeaponType currentActiveType = ActiveWeaponType.None;
 
+    // 添加武器类型顺序列表（定义滚轮切换顺序）
+    private readonly List<ActiveWeaponType> weaponPriority = new List<ActiveWeaponType>
+    {
+        ActiveWeaponType.Primary,
+        ActiveWeaponType.Secondary,
+        ActiveWeaponType.Melee
+    };
     // Start is called before the first frame update
     void Start()
     {
@@ -34,9 +41,17 @@ public class Inventory : MonoBehaviour
     {
         //ChangeCurrentWeaponID();
         // 数字键切换武器类型
-        if (Input.GetKeyDown(KeyCode.Alpha1)) SwitchWeapon(ActiveWeaponType.Primary);
-        if (Input.GetKeyDown(KeyCode.Alpha2)) SwitchWeapon(ActiveWeaponType.Secondary);
-        if (Input.GetKeyDown(KeyCode.Alpha3)) SwitchWeapon(ActiveWeaponType.Melee);
+        if (Input.GetKeyDown(KeyCode.Alpha1) && currentPrimary !=null) SwitchWeapon(ActiveWeaponType.Primary);
+        if (Input.GetKeyDown(KeyCode.Alpha2) && currentSecondary != null) SwitchWeapon(ActiveWeaponType.Secondary);
+        if (Input.GetKeyDown(KeyCode.Alpha3) && currentMelee != null) SwitchWeapon(ActiveWeaponType.Melee);
+
+        // 鼠标滚轮切换
+        float scroll = Input.GetAxis("Mouse ScrollWheel");
+        if (scroll != 0)
+        {
+            int direction = scroll > 0 ? 1 : -1; // 向上滚动为1，向下为-1
+            SwitchWeaponByScroll(direction);
+        }
     }
 
     //更新武器编号
@@ -193,8 +208,6 @@ public class Inventory : MonoBehaviour
     // 武器切换核心逻辑
     public void SwitchWeapon(ActiveWeaponType type)
     {
-        
-
         // 隐藏所有武器
         SetAllWeaponsActive(false);
 
@@ -202,17 +215,24 @@ public class Inventory : MonoBehaviour
         switch (type)
         {
             case ActiveWeaponType.Primary:
-                if (currentPrimary != null) currentPrimary.SetActive(true);
+                if (currentPrimary != null) currentPrimary.SetActive(true); 
+                    
+                
                 break;
             case ActiveWeaponType.Secondary:
                 if (currentSecondary != null) currentSecondary.SetActive(true);
+                
                 break;
             case ActiveWeaponType.Melee:
                 if (currentMelee != null) currentMelee.SetActive(true);
+                
                 break;
         }
 
-        currentActiveType = type;
+        
+        
+            currentActiveType = type;
+        
     }
 
     // 统一控制武器显示状态
@@ -221,5 +241,44 @@ public class Inventory : MonoBehaviour
         foreach (var weapon in primaryWeapons) weapon.SetActive(isActive);
         foreach (var weapon in secondaryWeapons) weapon.SetActive(isActive);
         foreach (var weapon in meleeWeapons) weapon.SetActive(isActive);
+    }
+
+    // 滚轮切换核心逻辑
+    private void SwitchWeaponByScroll(int direction)
+    {
+        if (currentActiveType == ActiveWeaponType.None) return;
+
+        // 获取当前类型在列表中的索引
+        int currentIndex = weaponPriority.IndexOf(currentActiveType);
+        if (currentIndex == -1) return;
+
+        // 计算下一个索引（循环滚动）
+        int nextIndex = (currentIndex + direction + weaponPriority.Count) % weaponPriority.Count;
+        ActiveWeaponType nextType = weaponPriority[nextIndex];
+
+        // 检查目标类型是否有武器
+        bool hasWeapon = CheckWeaponExistence(nextType);
+
+        // 递归查找下一个有效类型（最多循环一次）
+        if (!hasWeapon)
+        {
+            nextIndex = (nextIndex + direction + weaponPriority.Count) % weaponPriority.Count;
+            nextType = weaponPriority[nextIndex];
+            hasWeapon = CheckWeaponExistence(nextType);
+        }
+
+        if (hasWeapon) SwitchWeapon(nextType);
+    }
+
+    // 检查某类型是否有武器
+    private bool CheckWeaponExistence(ActiveWeaponType type)
+    {
+        switch (type)
+        {
+            case ActiveWeaponType.Primary: return currentPrimary != null;
+            case ActiveWeaponType.Secondary: return currentSecondary != null;
+            case ActiveWeaponType.Melee: return currentMelee != null;
+            default: return false;
+        }
     }
 }
