@@ -5,16 +5,16 @@ m_ProjectFiles:
     m_ContentTrackingEnabled: 1
     m_ModificationDate:
       serializedVersion: 2
-      ticks: 638734002620946618
-    m_Hash: 565120548
+      ticks: 638791862127418311
+    m_Hash: 328020453
   m_LockFileStatus:
     m_FilePath: E:/unity/unity/2022.3.17f1c1/project/Graduation Design2/Packages/packages-lock.json
     m_PathExists: 1
     m_ContentTrackingEnabled: 1
     m_ModificationDate:
       serializedVersion: 2
-      ticks: 638734002711603385
-    m_Hash: 432609577
+      ticks: 638791862127423308
+    m_Hash: 743624193
 m_EmbeddedPackageManifests:
   m_ManifestsStatus: {}
 m_LocalPackages:
